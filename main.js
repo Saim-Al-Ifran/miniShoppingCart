@@ -2,7 +2,6 @@ const increment = document.getElementById("increment");
 const mobileMainPrice  = parseFloat(document.getElementById("mobilePrice").innerText);
 
 const mobileQuantity = parseFloat(document.getElementById("mobileQuantity").value);
- 
 if(mobileQuantity <= 1){
      document.getElementById("decrement").setAttribute("disabled",true);
 }
