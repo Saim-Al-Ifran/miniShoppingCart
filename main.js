@@ -45,6 +45,7 @@ function calculateProduct(quantity,price){
      document.getElementById(quantity).value = incrementNumber;
      document.getElementById(price).innerText = incrementNumber * mobileMainPrice;
 }
+
 // validation on increment and decrement button
 function validateQuantity(reciveQuantity){
      if( reciveQuantity <= 1){
@@ -55,7 +56,6 @@ function validateQuantity(reciveQuantity){
      }
 
 }
-
 
 
  
