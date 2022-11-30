@@ -1,8 +1,6 @@
 const increment = document.getElementById("increment"); 
 const mobileMainPrice  = parseFloat(document.getElementById("mobilePrice").innerText);
-
 const mobileQuantity = parseFloat(document.getElementById("mobileQuantity").value);
-
 
 
 const quantityValidation = (validateQuantity,decrementId)=>{
@@ -17,20 +15,40 @@ quantityValidation(mobileQuantity,"decrement");
 // increment quantity event handler 
 increment.addEventListener("click",function(){
   
-      calculateProduct("mobileQuantity","mobilePrice",mobileMainPrice,"decrement")
+      calculateProduct("mobileQuantity","mobilePrice",mobileMainPrice,"decrement");
+      checkCashOut("mobilePrice","casePrice");
 
 });
 
+
+const checkCashOut = (priceOfMobile,priceOfCase) =>{
+    
+     let mobilePrice =  parseFloat(document.getElementById(priceOfMobile).innerText);
+     let casePrice =  parseFloat(document.getElementById(priceOfCase).innerText);
+     let sumOfProuductPrice = mobilePrice + casePrice; 
+     document.getElementById("subtotal").innerText = sumOfProuductPrice;
+     document.getElementById("total").innerText = mobilePrice + casePrice ;
+      
+}
 
 // decrement quantity event hanlder 
 const decrement = document.getElementById("decrement");
 
 decrement.addEventListener("click",function(){
 
-     decrementProduct("mobileQuantity","mobilePrice",mobileMainPrice,"decrement")
-     // validateQuantity(decrementNumber);
- 
+     decrementProduct("mobileQuantity","mobilePrice",mobileMainPrice,"decrement");
+     decrementCash(mobileMainPrice);
+      
 })
+
+const decrementCash = (price)=>{
+      
+     let subtotal = parseFloat(document.getElementById("subtotal").innerText); 
+     document.getElementById("subtotal").innerText =  subtotal - price;  
+     document.getElementById("total").innerText =  subtotal - price;  
+
+}
+
 
 const decrementProduct = (quantity,price,proudctMainPrice,decrementId) =>{
      const MobileQuantity = parseFloat(document.getElementById(quantity).value);
@@ -51,7 +69,7 @@ const calculateProduct = (quantity,price,proudctMainPrice,decrementId) =>{
      let   mobileQuantityNumber = parseFloat(mobileQuantity);
      
      let incrementNumber = 1 + mobileQuantityNumber;
-     
+      
      validateQuantity(incrementNumber,decrementId);
      document.getElementById(quantity).value = incrementNumber;
      document.getElementById(price).innerText = incrementNumber * proudctMainPrice;
@@ -79,8 +97,11 @@ const caseQuantity = parseFloat(document.getElementById("caseQuantity").value);
 // console.log(caseQuantity);
 quantityValidation(caseQuantity,"caseDecrement");
 
-caseIncrement.addEventListener("click",function(){     
+caseIncrement.addEventListener("click",function(){   
+
      calculateProduct("caseQuantity","casePrice",caseMainPrice,"caseDecrement");
+     checkCashOut("mobilePrice","casePrice");
+
 });
 
 // Decrement button event hanlder 
@@ -88,9 +109,10 @@ const caseDecrement = document.getElementById("caseDecrement");
 
 caseDecrement.addEventListener("click",function(){
      decrementProduct("caseQuantity","casePrice",caseMainPrice,"caseDecrement")
+     decrementCash(caseMainPrice);
      
 });
-
+ 
 
 
 
